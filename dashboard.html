@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="style-dashboard.css" />
+
+    <!-- Da acesso a lib através do cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <!-- Header -->
+    <div class="header">
+      <div class="container">
+        <h1>Projeto Analise de salários no Brasil</h1>
+      </div>
+    </div>
+
+    <div class="dash">
+      <!-- Farol de temperatura -->
+      <div class="graph">
+        <canvas id="myChart" style="width: 100%; height: 100%"></canvas>
+      </div>
+
+      <!-- Gráficos -->
+      <div class="graph">
+        <canvas id="myChart2" style="width: 100%; height: 100%"></canvas>
+      </div>
+
+      <div class="graph">
+        <canvas id="myChart3" style="width: 100%; height: 100%"></canvas>
+      </div>
+
+    </div>
+  </body>
+
+</html>
+
+<script>
+  // Inicia uma variável do tipo constante (não pode ser reatribuida)
+  const config1 = { 
+    type: "line", // tipo do gráfico
+    data: { // objeto que vai conter os dados do gráfico
+      labels: ["2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021"], // labels (rótulos) que serão identificados os nossos dados 
+      datasets: [ // datasets (conjunto de dados)
+        {
+          label: "Salário minimo", // irá conter o rótulo principal do nosso gráfico
+          data: [540.00, 622.00, 678.00, 724.00, 788.00, 880.00, 937.00, 954.00, 998.00, 1045.00, 1100.00 ], // os dados referentes aqueles rótulos
+          backgroundColor: "#ffc200", // cor das "bolinhas" do gráfico
+          borderColor: "#252525" // cor da "linha" do gráfico
+        }
+      ]
+    },
+    options: {
+      maintainAspectRatio: false 
+      /* maintainAspectRatio (manter relação de aspecto) 
+        caso true: ele "obdece" a altura e largura que colocamos
+        caso false: ele não "obdece" a altura e largura que colocamos e se ajusta ao componente pai
+      */
+    }
+  }
+  
+  const config2 = { 
+    type: "polarArea", // tipo do gráfico
+    data: { // objeto que vai conter os dados do gráfico
+      labels: ["Norte", "Nordeste", "Sudeste", "Sul", "Centro-Oeste"], // labels (rótulos) que serão identificados os nossos dados 
+      datasets: [ // datasets (conjunto de dados)
+        {
+          data: [1711.00, 1539.00, 2585.00, 2499.00, 2498.00], // os dados referentes aqueles rótulos
+          backgroundColor: ["#ffc200","#252525","#f44336aa","#2196F3aa","#4caf50aa", "#3F51B5aa"], // cor das "bolinhas" do gráfico
+          borderColor: ["#252525","#252525","#252525","#252525","#252525", "#252525"] // cor da "linha" do gráfico
+        }
+      ]
+    },
+    options: {
+    maintainAspectRatio: false,
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'Média de salário por região'
+      }
+    }
+  },
+};
+  
+  const config3 = { 
+    type: "bar", // tipo do gráfico
+    data: { // objeto que vai conter os dados do gráfico
+      labels: ["Brasil(total)", "Norte", "Nordeste", "Suldeste", "Sul", "Centro-Oeste"], // labels (rótulos) que serão identificados os nossos dados 
+      datasets: [ // datasets (conjunto de dados)
+        {
+          label: "Desemprego por região", // irá conter o rótulo principal do nosso gráfico
+          data: [11, 10.6, 13.6, 11.4, 6.8, 9.3 ], // os dados referentes aqueles rótulos
+          backgroundColor: ["#4caf50","#f44336","#2196F3", "#e2cb00","#3F51B5","#FC51B5"], // cor das "bolinhas" do gráfico
+        }
+      ]
+    },
+    options: {
+      maintainAspectRatio: false 
+      /* maintainAspectRatio (manter relação de aspecto) 
+        caso true: ele "obdece" a altura e largura que colocamos
+        caso false: ele não "obdece" a altura e largura que colocamos e se ajusta ao componente pai
+      */
+    }
+  }
+
+  var myChartLine1 = new Chart(document.getElementById("myChart"), config1); 
+  var myChartLine2 = new Chart(document.getElementById("myChart2"), config2); 
+  var myChartLine3 = new Chart(document.getElementById("myChart3"), config3); 
+  /* aqui obrigatoriamente tem que colocar new Chart() para criar um novo chart 
+  e passar dentro dos (parênteses) o elemento canvas que você quer mandar e 
+  separado pela virgula o que você quer mandar, no nosso caso a config que fizemos 
+  */
+</script>
